@@ -42,7 +42,7 @@ export default function Home() {
         <title>Vacation Roulette</title>
         <meta
           name="description"
-          content="Let AI spint the globe and take you away!"
+          content="Let AI spin the globe and take you away!"
         />
       </Head>
 
