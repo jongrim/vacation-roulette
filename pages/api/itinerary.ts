@@ -13,13 +13,12 @@ export default async function handler(
 
   const response = await openai.createCompletion({
     model: "text-davinci-003",
-    prompt: `I want to take a vacation that matches this description: ${prompt}\n\nPick a destination for my vacation and give me a three day itinerary. For each day include a list of places, and three restaurants along with how expensive a typical meal is.`,
+    prompt: `I want to take a vacation that matches this description: ${prompt}. Pick a destination for my vacation and give me a three day itinerary. For each day include a list of places as a comma separated list labelled "Places to Visit", and three restaurants as a comma separated list labelled "Restaurants".`,
     temperature: 0.7,
-    max_tokens: 1027,
+    max_tokens: 1024,
     top_p: 1,
     frequency_penalty: 0,
     presence_penalty: 0,
   });
-  console.log(response);
   res.status(201).json({ itinerary: response.data.choices[0].text });
 }
