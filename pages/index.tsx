@@ -36,7 +36,7 @@ export default function Home() {
   }
   return (
     <div
-      className={`h-screen w-screen flex flex-col overflow-auto ${poppins.className}`}
+      className={`h-[100dvh] h-full w-screen flex flex-col overflow-auto ${poppins.className}`}
     >
       <Head>
         <title>Vacation Roulette</title>
@@ -46,7 +46,7 @@ export default function Home() {
         />
       </Head>
 
-      <main className="grow p-12">
+      <main className="grow p-3 md:p-12">
         <Heading level="h1" className="mb-3 text-center">
           Vacation Roulette
         </Heading>
@@ -54,7 +54,7 @@ export default function Home() {
           <label htmlFor="prompt" className="px-3 font-semibold">
             What will your next adventure be?
           </label>
-          <span className="flex gap-2">
+          <span className="flex flex-wrap gap-2">
             <input
               className="grow rounded-full p-3 border border-solid border-gray-300"
               value={prompt}
