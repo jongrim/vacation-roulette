@@ -36,7 +36,7 @@ export default function Home() {
   }
   return (
     <div
-      className={`h-screen w-screen flex flex-col overflow-auto ${poppins.className}`}
+      className={`grow w-screen flex flex-col overflow-auto ${poppins.className}`}
     >
       <Head>
         <title>Vacation Roulette</title>
@@ -46,17 +46,20 @@ export default function Home() {
         />
       </Head>
 
-      <main className="grow p-12">
-        <Heading level="h1" className="mb-3 text-center">
+      <main className="grow px-4 py-12 md:p-12 max-w-4xl w-full mx-auto">
+        <Heading level="h1" className="mb-6 text-center">
           Vacation Roulette
         </Heading>
-        <form className="flex flex-col gap-1 mb-6" onSubmit={fetchItinerary}>
+        <form
+          className="flex flex-col gap-1 mb-6 w-full"
+          onSubmit={fetchItinerary}
+        >
           <label htmlFor="prompt" className="px-3 font-semibold">
             What will your next adventure be?
           </label>
-          <span className="flex gap-2">
+          <span className="w-full flex flex-col sm:flex-row gap-2">
             <input
-              className="grow rounded-full p-3 border border-solid border-gray-300"
+              className="sm:grow rounded-full p-3 border border-solid border-gray-300"
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
               placeholder="Beach vacation with snorkeling"
@@ -64,7 +67,7 @@ export default function Home() {
             />
             <button
               aria-label="Discover your next adventure"
-              className="p-3 rounded-full bg-gradient-to-br from-sky-600 to-sky-700 text-white"
+              className="p-3 rounded-full bg-gradient-to-br from-sky-600 to-sky-700 text-white grid place-content-center"
             >
               <PaperAirplaneIcon className="h-6 w-6" />
             </button>
