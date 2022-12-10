@@ -7,15 +7,17 @@ body,
 #__next {
   padding: 0;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
   height: 100vh;
 }
 
-@supports (height: 100dvh) {
+@supports (height: -webkit-fill-available) {
   html,
-  body {
-    padding: 0;
-    margin: 0;
-    height: 100dvh;
+  body,
+  #__next {
+    height: -webkit-fill-available !important;
   }
 }
 
