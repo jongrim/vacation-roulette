@@ -1,7 +1,5 @@
-import { Comfortaa } from "@next/font/google";
 import React from "react";
-
-const comfortaa = Comfortaa({ weight: ["400"], subsets: ["latin"] });
+import { comfortaa } from "../util/comfortaa";
 
 export default function Heading({
   level,
@@ -9,7 +7,7 @@ export default function Heading({
   className = "",
 }: React.PropsWithChildren<{ level: string; className?: string }>) {
   const styling: Record<string, string> = {
-    h1: "text-3xl",
+    h1: "text-2xl sm:text-3xl md:text-4xl",
   };
 
   return React.createElement(
