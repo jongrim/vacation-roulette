@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import Image from "next/image";
 import { Itinerary } from "../types/itinerary";
 import PrimaryButton from "./primaryButton";
 import Heading from "./heading";
@@ -114,7 +113,7 @@ export default function ItineraryView({
             >
               {place.photos?.[0] && (
                 <div className="w-full h-48 overflow-hidden rounded-t-xl object-cover">
-                  <Image
+                  <img
                     src={place.photos?.[0].getUrl()}
                     className="object-cover rounded-t-xl"
                     alt=""
