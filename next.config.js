@@ -3,10 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: [
-      "https://vacation-roulette.vercel.app/",
-      "https://vacation-roulette-jonjongrim.vercel.app/",
-    ],
+    domains: ["https://vacation-roulette.vercel.app/", "maps.googleapis.com"],
     remotePatterns: [
       {
         protocol: "https",
