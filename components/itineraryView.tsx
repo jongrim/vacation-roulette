@@ -22,17 +22,20 @@ export default function ItineraryView({
   const [places, setPlaces] = useState<google.maps.places.PlaceResult[]>([]);
   const [markers, setMarkers] = useState<google.maps.Marker[]>([]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (!mapRef.current) {
       throw new Error("no map");
     }
+    if (map) {
+      return;
+    }
     var center = new google.maps.LatLng(0, 0);
-    const map = new google.maps.Map(mapRef.current, {
+    const newMap = new google.maps.Map(mapRef.current, {
       center,
       zoom: 1,
     });
-    setMap(map);
-  }, [google]);
+    setMap(newMap);
+  }, [google, map]);
 
   useEffect(() => {
     if (!map) return;
