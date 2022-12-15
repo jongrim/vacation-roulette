@@ -5,7 +5,7 @@ import { Itinerary } from "../types/itinerary";
 const itineraryMachine = createMachine(
   {
     schema: {
-      context: {} as { itinerary: string },
+      context: {} as { itinerary: Itinerary },
       events: {} as { type: "CREATE_NEW"; prompt: string } | { type: "CLEAR" },
     },
     initial: "search",

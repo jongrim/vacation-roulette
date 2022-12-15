@@ -8,6 +8,8 @@ export default function Heading({
 }: React.PropsWithChildren<{ level: string; className?: string }>) {
   const styling: Record<string, string> = {
     h1: "text-2xl sm:text-3xl md:text-4xl",
+    h2: "text-xl sm:text-2xl md:text-3xl",
+    h3: "text-lg sm:text-xl md:text-2xl",
   };
 
   return React.createElement(

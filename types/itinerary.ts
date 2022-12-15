@@ -1,9 +1,11 @@
 export interface Day {
   number: number;
-  places: string[];
+  placesToVisit: string[];
+  restaurants: string[];
 }
 
 export interface Itinerary {
   id: string;
-  days: Day[];
+  destination?: string;
+  days?: Day[];
 }
