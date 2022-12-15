@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
+import { Loader } from "@googlemaps/js-api-loader";
 import { Poppins } from "@next/font/google";
 import Footer from "../components/footer";
 import PlanePic from "../public/paper-plane-with-globe.png";
@@ -8,11 +9,23 @@ import ItineraryForm from "../components/itineraryForm";
 import { useMachine } from "@xstate/react";
 import itineraryMachine from "../machines/itineraryMachine";
 import FlyingPlaneLoader from "../components/flyingPlaneLoader";
-import PrimaryButton from "../components/primaryButton";
+import ItineraryView from "../components/itineraryView";
+import { useEffect, useState } from "react";
 
 const poppins = Poppins({ weight: ["400", "500", "600"], subsets: ["latin"] });
 
 export default function Home() {
+  const [google, setGoogle] = useState<typeof globalThis.google>();
+  useEffect(() => {
+    const loader = new Loader({
+      apiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "",
+      version: "weekly",
+      libraries: ["places"],
+    });
+    loader.load().then((loaded) => {
+      setGoogle(loaded);
+    });
+  }, []);
   const [state, send] = useMachine(itineraryMachine);
   return (
     <div
@@ -34,6 +47,7 @@ export default function Home() {
                 src={PlanePic}
                 alt=""
                 className="rounded-xl shadow-xl w-96"
+                priority
               />
               <ItineraryForm
                 onSubmit={(prompt: string) => send("CREATE_NEW", { prompt })}
@@ -42,15 +56,12 @@ export default function Home() {
           </section>
         )}
         {state.value === "building" && <FlyingPlaneLoader />}
-        {state.value === "viewing" && (
-          <section className="p-8">
-            <p className="whitespace-pre-wrap mb-12">
-              {state.context.itinerary}
-            </p>
-            <PrimaryButton onClick={() => send("CLEAR")}>
-              Clear and return to start
-            </PrimaryButton>
-          </section>
+        {state.value === "viewing" && google && (
+          <ItineraryView
+            itinerary={state.context.itinerary}
+            onClear={() => send("CLEAR")}
+            google={google}
+          />
         )}
       </div>
       <Footer />

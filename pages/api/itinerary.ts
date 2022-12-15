@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Configuration, OpenAIApi } from "openai";
+import parseTextItinerary from "../../util/parseTextItinerary";
 
 export default async function handler(
   req: NextApiRequest,
@@ -13,12 +14,17 @@ export default async function handler(
 
   const response = await openai.createCompletion({
     model: "text-davinci-003",
-    prompt: `I want to take a vacation that matches this description: ${prompt}. Pick a destination for my vacation and give me a three day itinerary. For each day include a list of places as a comma separated list labelled "Places to Visit", and three restaurants as a comma separated list labelled "Restaurants".`,
+    prompt: `I want to take a vacation that matches this description: ${prompt}. Pick a destination for my vacation and label it "Destination". Build a three day itinerary for the destination. For each day include a list of places that are near to each other as a comma separated list labelled "Places to Visit", and three restaurants as a comma separated list labelled "Restaurants".`,
     temperature: 0.7,
     max_tokens: 1024,
     top_p: 1,
     frequency_penalty: 0,
     presence_penalty: 0,
   });
-  res.status(201).json({ itinerary: response.data.choices[0].text });
+  const itinerary = response.data.choices[0].text ?? "";
+  const parsed = parseTextItinerary({
+    itineraryText: itinerary,
+    countOfDays: 3,
+  });
+  res.status(201).json({ itinerary: parsed });
 }
