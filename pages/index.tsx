@@ -11,6 +11,7 @@ import itineraryMachine from "../machines/itineraryMachine";
 import FlyingPlaneLoader from "../components/flyingPlaneLoader";
 import ItineraryView from "../components/itineraryView";
 import { useEffect, useState } from "react";
+import { comfortaa } from "../util/comfortaa";
 
 const poppins = Poppins({ weight: ["400", "500", "600"], subsets: ["latin"] });
 
@@ -55,7 +56,16 @@ export default function Home() {
             </div>
           </section>
         )}
-        {state.value === "building" && <FlyingPlaneLoader />}
+        {state.value === "building" && (
+          <div className="grow grid place-content-center">
+            <p
+              className={`relative -top-12 font-semibold text-lg sm:text-2xl text-center ${comfortaa.className}`}
+            >
+              Building your next adventure!
+            </p>
+            <FlyingPlaneLoader />
+          </div>
+        )}
         {state.value === "viewing" && google && (
           <ItineraryView
             itinerary={state.context.itinerary}
